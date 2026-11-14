@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nandraa Register – Shadi Mutee Abdullah (April 2026)</title>
+<style>
+  :root{
+    --bg:#f6f4ef; --card:#fff; --ink:#1f2933; --muted:#667085; --line:#e4e0d6;
+    --accent:#14532d; --accent-soft:#e7f1ea; --warn:#fff4d6; --warn-ink:#8a5a00;
+    --m:#9d174d; --b:#1d4ed8; --n:#14532d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,Arial,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 18px 60px}
+  header h1{margin:0 0 2px;font-size:26px}
+  header .ur{font-family:"Jameel Noori Nastaleeq","Noto Nastaliq Urdu","Urdu Typesetting","Segoe UI",Tahoma,sans-serif;font-size:24px;direction:rtl;color:var(--accent)}
+  header p{margin:6px 0 0;color:var(--muted)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:20px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;border-top:4px solid var(--accent)}
+  .card.m{border-top-color:var(--m)} .card.b{border-top-color:var(--b)} .card.n{border-top-color:var(--n)} .card.g{border-top-color:#111}
+  .card .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  .card .val{font-size:24px;font-weight:700;margin-top:2px}
+  .card .sub{font-size:13px;color:var(--muted)}
+  .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;position:sticky;top:0;z-index:5}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tabs button{border:1px solid var(--line);background:#fff;padding:7px 13px;border-radius:999px;cursor:pointer;font:inherit}
+  .tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .bar input[type=search],.bar select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;min-width:170px}
+  .bar label{font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center}
+  .bar .sp{flex:1}
+  .btn{border:1px solid var(--accent);background:var(--accent);color:#fff;padding:7px 13px;border-radius:8px;cursor:pointer;font:inherit}
+  .btn.ghost{background:#fff;color:var(--accent)}
+  .status{margin:12px 2px 8px;color:var(--muted);font-size:14px}
+  .status b{color:var(--ink)}
+  .tblwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:auto}
+  table{border-collapse:collapse;width:100%}
+  th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+  thead th{background:#faf8f3;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);cursor:pointer;white-space:nowrap;user-select:none}
+  thead th.num,td.num{text-align:right}
+  tbody tr:hover{background:#fbfaf6}
+  td.ur{font-family:"Jameel Noori Nastaleeq","Noto Nastaliq Urdu","Urdu Typesetting","Segoe UI",Tahoma,sans-serif;font-size:18px;direction:rtl;text-align:right;line-height:1.9}
+  td.num{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+  .tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;color:#fff;white-space:nowrap}
+  .tag.M{background:var(--m)} .tag.B{background:var(--b)} .tag.N{background:var(--n)}
+  tr.chk td{background:var(--warn)}
+  .q{display:inline-block;margin-left:6px;font-size:11px;color:var(--warn-ink);border:1px solid #e6c36a;border-radius:6px;padding:0 5px;background:#fff}
+  .note{font-size:13px;color:var(--muted)}
+  tfoot td{font-weight:700;background:#faf8f3}
+  h2{margin:34px 0 10px;font-size:19px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:860px){.grid2{grid-template-columns:1fr}}
+  .ok{color:#166534;font-weight:600} .bad{color:#b42318;font-weight:600}
+  .legend{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;color:#344054}
+  .legend li{margin:4px 0}
+  #t tbody tr{cursor:pointer}
+  .edbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+  .edbar .sp{flex:1}
+  .edhelp{display:none;margin-top:8px;padding:9px 14px;border-radius:10px;background:#e8f0fe;color:#1e3a8a;font-size:14px}
+  body.editing .edhelp{display:block}
+  body.editing td.ed{cursor:text;background:#f3f7ff;box-shadow:inset 0 0 0 1px #c7d7fe}
+  body.editing td.ed:focus{outline:2px solid #1d4ed8;background:#fff}
+  #toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(80px);background:#111;color:#fff;padding:10px 16px;border-radius:10px;opacity:0;transition:.25s;z-index:20;max-width:92vw}
+  #toast.on{opacity:1;transform:translateX(-50%)}
+  #toast button{margin-left:10px;background:#fff;border:0;border-radius:6px;padding:3px 10px;cursor:pointer;font:inherit}
+  @media print{.edbar,.edhelp,#toast{display:none!important}}
+  .pbtns{display:flex;gap:6px;flex-shrink:0}
+  .pbtns .btn{padding:6px 12px;font-size:17px;line-height:1}
+  dialog#proof:not(.nav) .navb{display:none}
+  #pbox{overscroll-behavior:contain}
+  #pcv{max-width:none}
+  /* photos-only view */
+  #gallery{display:none;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-top:16px}
+  #gallery figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer}
+  #gallery canvas{display:block;width:100%;height:auto;background:#ddd}
+  #gallery figcaption{padding:8px 10px;font-size:13px;color:var(--muted)}
+  #gallery figcaption b{color:var(--ink)}
+  body.photos #gallery{display:grid}
+  body.photos .cards,body.photos .edbar,body.photos .edhelp,body.photos .status,body.photos .tblwrap,body.photos .grid2,body.photos h2,body.photos .legend,body.photos .bar>:not(.tabs){display:none!important}
+  /* phones */
+  @media (max-width:720px){
+    body{font-size:14px}
+    .wrap{padding:14px 10px 50px}
+    header h1{font-size:20px} header .ur{font-size:19px} header p{font-size:12.5px}
+    .cards{grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+    .card{padding:10px 12px} .card .val{font-size:18px} .card .lbl{font-size:10.5px} .card .sub{font-size:12px}
+    .bar{position:static;padding:10px;gap:8px}
+    .tabs{width:100%} .tabs button{padding:7px 11px;flex:1 1 auto}
+    .bar input[type=search],.bar select{width:100%;min-width:0;font-size:16px}
+    .bar .sp,.bar button[onclick]{display:none}
+    .bar .btn{flex:1}
+    .edbar .btn{flex:1 1 40%;text-align:center}
+    #t,#t tbody{display:block} #t thead,#t tfoot{display:none}
+    #t tbody tr{display:grid;grid-template-columns:auto auto 1fr auto;grid-template-areas:"en en en amt" "ur ur ur ur" "ven ven vur vur" "tag pg sn sn" "note note note note";gap:3px 8px;align-items:center;padding:11px 12px;border-bottom:1px solid var(--line)}
+    #t tbody tr.chk{background:var(--warn)}
+    #t tbody td{border:0;padding:0;background:none!important;min-width:0}
+    #t tbody td:nth-child(1){display:none}
+    #t tbody td:nth-child(2){grid-area:tag}
+    #t tbody td:nth-child(3){grid-area:pg;font-size:12px;color:var(--muted)} #t tbody td:nth-child(3)::before{content:"page "}
+    #t tbody td:nth-child(4){grid-area:sn;font-size:12px;color:var(--muted)} #t tbody td:nth-child(4)::before{content:"· serial "}
+    #t tbody td:nth-child(5){grid-area:en;font-weight:600;font-size:15px}
+    #t tbody td:nth-child(6){grid-area:ur;font-size:17px;line-height:1.8}
+    #t tbody td:nth-child(7){grid-area:ven;color:#344054}
+    #t tbody td:nth-child(8){grid-area:vur;font-size:16px;line-height:1.7}
+    #t tbody td:nth-child(9){grid-area:amt;font-size:16px;text-align:right}
+    #t tbody td:nth-child(10){grid-area:note} #t tbody td:nth-child(10):empty{display:none}
+    body.editing #t tbody td.ed{padding:5px 6px;border-radius:6px;min-height:30px}
+    .grid2 .tblwrap th,.grid2 .tblwrap td{padding:6px 8px;font-size:13px}
+    dialog#proof{width:100vw;max-width:100vw;max-height:100dvh;height:100dvh;border-radius:0;margin:0}
+    .phead{padding:8px 10px;font-size:13px}
+    #gallery{grid-template-columns:1fr 1fr;gap:8px}
+  }
+  dialog#proof{border:0;border-radius:14px;padding:0;width:min(760px,96vw);max-height:94vh;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  dialog#proof[open]{display:flex;flex-direction:column}
+  dialog#proof::backdrop{background:rgba(0,0,0,.55)}
+  .phead{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;padding:12px 16px;border-bottom:1px solid var(--line)}
+  #pbox{overflow:auto;flex:1;background:#222}
+  #pcv{display:block;width:100%;height:auto}
+  .pfoot{padding:8px 16px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);word-break:break-all}
+  @media print{.bar,.btn{display:none!important} body{background:#fff} .tblwrap,.card{border-color:#bbb} tr.chk td{background:#fff}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Nandraa Register – Shadi Mutee Abdullah</h1>
+  <div class="ur">نیندرہ شادی مطیع عبداللہ — مہندی، بارات (سلامی)، ولیمہ</div>
+  <p>Typed from 19 photos of the notebook · Mehndi 03 Apr 2026 · Baraat (Salami) 04 Apr 2026 · Shadi Neondra 05 Apr 2026 (Sunday) · amounts in PKR</p>
+</header>
+
+<div class="cards" id="cards"></div>
+
+<div class="bar">
+  <div class="tabs" id="tabs"></div>
+  <input type="search" id="q" placeholder="Search name / village / serial…">
+  <select id="vil"><option value="">All residences</option></select>
+  <select id="sortsel" title="Sort"><option value="i">Sort: notebook order</option><option value="amtd">Sort: amount, high → low</option><option value="amta">Sort: amount, low → high</option><option value="en">Sort: name A–Z</option><option value="ven">Sort: residence A–Z</option></select>
+  <label><input type="checkbox" id="onlychk"> Only “needs check”</label>
+  <span class="sp"></span>
+  <button class="btn ghost" id="edit">✎ Edit English spellings</button>
+  <button class="btn ghost" onclick="window.print()">Print</button>
+  <button class="btn" id="dl">Download CSV</button>
+</div>
+
+<div id="gallery"></div>
+<div class="edbar">
+  <span id="edcount" class="note"></span>
+  <span class="sp"></span>
+  <button class="btn ghost" id="exp">Export corrections</button>
+  <label class="btn ghost" style="cursor:pointer">Import corrections<input type="file" id="imp" accept=".json" hidden></label>
+  <button class="btn ghost" id="rst">Reset all</button>
+</div>
+<div class="edhelp">Editing is on: click an English name or residence, type the correct spelling, press Enter (Esc cancels). A <b>residence</b> correction updates every entry with that residence; a <b>name</b> correction changes only that one entry. Clear a cell to go back to the automatic spelling.</div>
+<div id="toast"></div>
+
+<div class="status" id="status"></div>
+<div class="tblwrap">
+<table id="t">
+  <thead><tr>
+    <th data-k="i">#</th><th data-k="e">Event</th><th data-k="p">Page</th><th data-k="sn">Serial</th>
+    <th data-k="en">Name (English)</th><th data-k="name" style="text-align:right">نام ولدیت</th><th data-k="ven">Residence</th><th data-k="vil" style="text-align:right">سکونت</th>
+    <th data-k="amt" class="num">Amount</th><th data-k="note">Note</th>
+  </tr></thead>
+  <tbody></tbody>
+  <tfoot><tr><td colspan="8">Total of rows shown</td><td class="num" id="ft"></td><td></td></tr></tfoot>
+</table>
+</div>
+
+<div class="grid2">
+  <div>
+    <h2>By residence (all events)</h2>
+    <div class="tblwrap"><table id="tv"><thead><tr><th>Residence</th><th style="text-align:right">سکونت</th><th class="num">Entries</th><th class="num">Total</th></tr></thead><tbody></tbody></table></div>
+  </div>
+  <div>
+    <h2>Page totals – typed vs. written in the notebook</h2>
+    <div class="tblwrap"><table id="tp"><thead><tr><th>Event</th><th>Page</th><th class="num">Entries</th><th class="num">Typed sum</th><th class="num">Written</th><th>Match</th></tr></thead><tbody></tbody></table></div>
+  </div>
+</div>
+
+<h2>Reading notes</h2>
+<div class="legend"><ul>
+  <li><b>Proof:</b> tap any row to open the notebook photo it was typed from, with that entry boxed in red. Keep this file in the same folder as the photos.</li>
+  <li>Rows highlighted in yellow (<span class="q">check</span>) contain a name or residence that was hard to read in the handwriting – please verify against the notebook.</li>
+  <li>Ditto marks (″) in the notebook have been filled in with the value from the row above.</li>
+  <li>Serial numbers are kept exactly as written: in the main register 125 and 164 were never used, and 201–202 were used twice.</li>
+  <li>Page 5 of the main register adds up to 36,000 but 38,000 is written; page 6 adds up to 36,500 (written, then struck out and replaced with 35,000).</li>
+  <li>“Haar / Mala” in the Baraat list are the tick-marked garland notes written beside the amount.</li>
+</ul></div>
+</div>
+
+<dialog id="proof">
+  <div class="phead"><div id="pcap"></div>
+    <div class="pbtns"><button class="btn ghost navb" id="pprev" title="Previous photo">‹</button><button class="btn ghost navb" id="pnext" title="Next photo">›</button><button class="btn ghost" id="pzout" title="Zoom out">−</button><button class="btn ghost" id="pzin" title="Zoom in">+</button><button class="btn" id="pclose">✕</button></div></div>
+  <div id="pbox"><canvas id="pcv"></canvas></div>
+  <div class="pfoot"><span id="pnote"></span> Original photo: <a id="plink" target="_blank"></a></div>
+</dialog>
+
+<script id="data" type="text/plain">
+M|1|1|محمد ساجد ولد محمد یٰسین|واہ کینٹ|1000||
+M|1|2|توصیف احمد|واہ کینٹ|1000||
+M|1|3|محمد طفیل|واہ کینٹ|1000||
+M|1|4|محمد عثمان|واہ کینٹ|1000||
+M|1|5|محمد نجیب|واہ کینٹ|1000||
+M|1|6|اورنگزیب ولد محمد نواز|لیٹڑیاں|1000||
+M|1|7|غفران ولد دلدار|واہ کینٹ|1000||
+M|1|8|محمد ارشاد ولد فضل داد|واہ کینٹ|1000||
+M|1|9|محمد عرفات ولد فضل داد|واہ کینٹ|500||
+M|1|10|محمد شیراز ولد محمد ظہیر|واہ کینٹ|500||
+M|1|11|محمد شہزاد ولد محمد ظہیر|واہ کینٹ|1000||
+M|1|12|محمد ندیم ولد محمد نثار|گوہڑہ|1000||
+M|1|13|ضیاء محمد ولد میر محمد|واہ کینٹ|5000||
+M|1|14|محمد بشارت ولد محمد مطیع|بیگالیاں|2000||
+M|1|15|مکھن حسین|گلیاں|2000||
+M|1|16|محمد آفتاب ولد عبدالرزاق|واہ کینٹ|1000||
+M|1|17|محمد اورنگزیب|واہ کینٹ|1000||
+M|1|18|گل نواز ولد سخی محمد|واہ کینٹ|1000||
+M|1|19|محمد مسکین|دھنگڑاں|500||
+M|1|20|طارق ضیاء ولد محمد قربان|ڈھونگا کہنہ|500||
+M|1|21|واحد لطیف|گوہڑہ|2000||
+M|1|22|ماسٹر محمد زبیر|دھار|2000|Title before name and residence unclear|1
+M|1|23|ہدایت جان|ڈھونگا کہنہ|1000||
+M|1|24|مظلوم حسین|واہ کینٹ|1000||
+M|1|25|حافظ ظفیر|دھنگڑاں|1000||
+M|1|26|محمد شبیر ولد محمد اسماعیل|دھنگڑاں|1000||
+M|1|27|محمد سجاد ولد مکھن خان|دھنگڑاں|1500||
+M|1|28|افتخار حسین ولد مکھن خان|دھنگڑاں|1500||
+M|1|29|محمد شہباز ولد مکھن خان|دھنگڑاں|1500||
+M|1|30|محمد ابرار|لیٹڑیاں|1000||
+M|2|31|رضا محمد ولد میر محمد|سیاہ|2000||
+M|2|32|طاہر محمود ولد محمد بشارت|سری|1500||
+M|2|33|اشتیاق ولد الطاف|لیٹڑیاں|1000||
+M|2|34|محمد نوید ولد محمد رفیق|دھیرکوٹ|1000||
+M|2|35|محمد فیصل لطیف|گوہڑہ|1000||
+M|2|36|محمود حسین ولد دلدار|چلاورہ|1500||
+M|2|37|محمد افضال|گلیاں|1500||
+M|2|38|محمد افریز|بیگالیاں|1000|Name unclear|1
+M|2|39|محمد نصیر ولد محمد یوسف|واہ کینٹ|1000||
+M|2|40|محمد جمیل|سیاہ|1000||
+M|2|41|انوار الحق ولد محمد اشفاق|بیگالیاں|1500||
+M|2|42|وقار احمد ولد خورشید احمد|واہ کینٹ|2000||
+M|2|43|عامر شہزاد ولد محمد منیر|گڑاوٹ آباد|1000|Residence unclear|1
+M|2|44|امتیاز حسین|بوئی موڑ|1000||
+M|2|45|حمدان ولد محمد وحید|واہ کینٹ|1000||
+M|2|46|حق نواز ولد سخی محمد|سیاہ|1500||
+M|2|47|محمد شیراز ولد محمد ظہیر|سیاہ|1000||
+M|2|48|محمد گلفراز ولد سخی محمد|سیاہ|2000||
+M|2|49|توصیف ولد احمد نواز|سیاہ|1000||
+M|2|50|سجاد خان|واہ کینٹ|500||
+M|2|51|امجد خان|واہ کینٹ|500||
+M|2|52|شاہد محمود ولد محمد بشارت|بیگالیاں|1500||
+M|2|53|لیاقت سٹی ولد ریاض|واہ کینٹ|1000|Father's name unclear|1
+M|2|54|حافظ ظفیر الحق ولد حاجی عبدالخالق (مرحوم)|ڈھنگڑال (اسلام آباد)|1000|Running total written: 66,500|
+M|2|—|وکالت حسین|واہ کینٹ|1000|Added after no. 54, no serial; final total written: 67,500|
+B|1|1|ہدایت جان|ڈھونگا کہنہ|1000||
+B|1|2|ضیاء محمد|واہ کینٹ|5000||
+B|1|3|روبینہ باجی (واحد لطیف)|گوہڑہ|2000|Haar ✓|
+B|1|4|مکھن حسین|گلیاں|2000|Haar ✓|
+B|1|5|محمد شبیر ولد محمد اسماعیل|دھنگڑاں|1000|Haar ✓|
+B|1|6|محمد افتخار|دھنگڑاں|1500|Haar ✓|
+B|1|7|محمد سجاد|دھنگڑاں|1500|Haar ✓|
+B|1|8|ماسٹر محمد زبیر|ڈھونگا کہنہ|3000|Mala; title before name unclear|1
+B|1|9|واحد لطیف|گوہڑہ|1000||
+B|1|10|انعام|—|1000|No residence written|
+B|1|11|رضا محمد|بارہ کہو|2000|Haar ✓|
+B|1|12|محمد شہباز|گلیاں|1500|Haar ✓|
+B|1|13|محمد افضال|گلیاں|1500|Haar ✓|
+B|1|14|محمود حسین|چلاورہ|5000|Haar ✓; amount overwritten (500/5000) – 5000 fits the written page total|1
+B|1|15|محمد یاسر داد خان|سیاہ|1000|Mala; name unclear|1
+B|1|16|محمد ظہیر|دھنگڑاں|1000||
+B|1|17|ضیاء الحق ولد کیپٹن محمد مشتاق|واہ کینٹ|1000||
+B|1|18|طاہر محمود ولد محمد بشارت|سری|5000|Haar ✓|
+B|1|19|راشد مشتاق|چارپان|1000|Residence unclear|1
+B|1|20|محمد ظفیر|دھنگڑاں|1000||
+B|1|21|محمد نوید|بوئی موڑ|1500||
+B|1|22|وحید حسین|سیاہ|1500||
+B|1|23|محمد ندیم|گوہڑہ|1000||
+B|1|24|محمد افریز|بیگالیاں|1000|Name unclear|1
+B|1|25|عاصم علی|گوہڑہ|1000||
+B|1|26|محمد اشتیاق|لیٹڑیاں|1000||
+B|1|27|محمد بشارت|بیگالیاں|5000|Haar ✓|
+B|1|28|محمد ریاست|لیٹڑیاں|1000||
+B|1|29|فیصل صابر|دھنگڑاں|1000||
+B|1|30|محمد حامد|بڑھانہ|1000|Residence unclear|1
+B|2|31|محمد ابرار|لیٹڑیاں|1000||
+B|2|32|محمد غفران|واہ کینٹ|1000||
+B|2|33|گل نواز|سیاہ|1000||
+B|2|34|محمد ارشاد|واہ کینٹ|1000||
+B|2|35|محمد سراج|سیاہ|1000||
+B|2|36|محمد توصیف|لیٹڑیاں|1000||
+B|2|37|انوار الحق ولد محمد اشفاق|بیگالیاں|5000|Haar ✓|
+B|2|38|شاہد محمود ولد محمد بشارت|بیگالیاں|5000|Haar ✓|
+B|2|39|محمد نوید ولد محمد منیر|لاہور|500||
+B|2|40|محمد جلیل|واہ کینٹ|1000||
+B|2|41|محمد عمران|واہ کینٹ|1000||
+B|2|42|محمد امتیاز سٹی|بوئی موڑ|1000||
+B|2|43|محمد ارشد|لیٹڑیاں|1000||
+B|2|44|حق نواز|واہ کینٹ|1000||
+B|2|45|گل فراز|شکریال|2000||
+B|2|46|محمد وقار|لیٹڑیاں|2000||
+B|2|47|محمد ظفر|سیاہ|1000|Name unclear (ظفر / طفیل)|1
+B|2|48|تنویر حسین|واہ کینٹ|1000|Written total for 1–48: 81,500|
+B|2|49|عبدالحمید (مرحوم)|واہ کینٹ|1500|Second block; serial 49 written twice|
+B|2|49|ماسٹر محمد امجد|سیاہ|1500||
+B|2|50|محمد شاہد|سیاہ|1500|Name unclear (شاہد / ساجد)|1
+B|2|51|محمد غفار ولد محمد رحمٰن مرحوم|سیاہ|500||
+B|2|52|عبدالرافع جنید اشرف|مانسہرہ|2000||
+B|2|53|عبدالکریم|—|2000|No residence written|
+B|2|54|محمد طارق|—|2000|Written total for second block: 11,000|
+N|1|1|محمد نجیب ولد محمد رشید|واہ|2000||
+N|1|2|محمد عثمان ولد بابو محمد امتیاز|واہ|1500||
+N|1|3|محمد رشید ولد سلطان محمود|گوہڑہ|1000||
+N|1|4|حاجی محمد رشید ولد محمد اکرم|لیٹڑیاں|1500|A short word before the village name is unclear|1
+N|1|5|محمد نواز ولد محمد الیاس|سیاہ|500||
+N|1|6|محمد نقیب ولد محمد رشید|حسن آباد|1000||
+N|1|7|محمد سرفراز ولد راجہ محمد ممتاز|بڑھانہ|1000|Residence unclear|1
+N|1|8|ظفر احمد ولد محمد اشرف|سیاہ|2000||
+N|1|9|محمد شہزاد ولد محمد نواز|سیاہ|1000||
+N|1|10|محمد الجبار ولد محمد اکرم|سیاہ|2000||
+N|1|11|محمد نوید ولد محمد ریاض|واہ|1000|A bracketed word after واہ is unclear|1
+N|1|12|آصف اقبال ولد محمد ہلال|گوہڑہ|2000||
+N|1|13|حافظ ظفر ریاض ولد محمد ریاض|انگوری|2000||
+N|1|14|محمد الطاف ولد محمد اسلم|سیاہ|1000||
+N|1|15|محمد عمران ولد محمد وحید|واہ|1000||
+N|1|16|محمد نوید ولد محمد رفیق|واہ|2000||
+N|1|17|ماسٹر محمد جاوید ولد لال خان|بڑاکھر|1000|Residence unclear|1
+N|1|18|محمد سلیم ولد لال خان|بڑاکھر|1000|Residence unclear|1
+N|1|19|حاجی تاج محمد صاحب|لیٹڑیاں|2000||
+N|1|20|محمد ظہیر ولد عزیز محمد|لیٹڑیاں|1500||
+N|1|21|خالد محمود ولد عزیز محمد|لیٹڑیاں|1000||
+N|1|22|شاہد محمود ولد منظور خان|سیاہ|2000||
+N|1|23|تنویر احمد ولد محمد ہوشیار|واہ|2000||
+N|2|24|محمد خورشید ولد خان افسر|چلاورہ|1000|Residence unclear|1
+N|2|25|ظفر محمود ولد ماسٹر محمد یوسف|بڑھانہ|2000|Residence unclear|1
+N|2|26|ارشد محمود ولد ماسٹر محمد یوسف|بڑھانہ|1500|Residence unclear|1
+N|2|27|ماجد محمود ولد ماسٹر محمد یوسف|بڑھانہ|1500|Residence unclear|1
+N|2|28|واجد محمود ولد ماسٹر محمد یوسف|بڑھانہ|1500|Residence unclear|1
+N|2|29|راشد محمود ولد ماسٹر محمد یوسف|بڑھانہ|1500|Residence unclear|1
+N|2|30|بابو محمد حفیظ صاحب|دھنگڑاں|2000||
+N|2|31|محمد سلیم صاحب|بارہ کہو|3000||
+N|2|32|لیاقت حسین|بڑھانہ|2000|Residence unclear|1
+N|2|33|اورنگزیب صاحب|حسن آباد|1000||
+N|2|34|ادریس احمد ولد فضل احمد|دھنگڑاں|2000||
+N|2|35|محمد یاسر ولد محمد نذیر|گوہڑہ|1000|Father's name unclear|1
+N|2|36|محمد گلنواز ولد سخی محمد|واہ|1500||
+N|2|37|محمد ندیم ولد محمد نثار|گوہڑہ|3000||
+N|2|38|محمد ریاض ولد محمد فاضل|گلیاں|1500||
+N|2|39|ریاست حسین ولد عبدالکریم|دھنگڑاں|1000|Father's name unclear|1
+N|2|40|طالب حسین ولد عبدالکریم|دھنگڑاں|1000|Father's name unclear|1
+N|2|41|محمد وحید ولد محمد یعقوب|گوہڑہ|1000||
+N|2|42|محمد مرتضیٰ صاحب|حسن ابدال|2000||
+N|2|43|آصف حسین ولد محمد جلال|سیاہ|1500||
+N|2|44|شمشیر علی ولد محمد اسماعیل|دھنگڑاں|5000||
+N|2|45|ارشد حسین ولد محمد قادر|علی پور|1000||
+N|2|46|حسن زیب ولد مقبول حسین|لیٹڑیاں|2000||
+N|2|47|لطیف الرحمان|لیٹڑیاں|1000|A bracketed word after the name is unclear|1
+N|3|48|صابر حسین ولد محمد اسماعیل|دھنگڑاں|1000||
+N|3|49|بابو محمد سلیم ولد محمد اسلم|ملی|2000|Residence unclear|1
+N|3|50|محمد جمشید ولد محمد اسلم|ملی|1500|Residence unclear|1
+N|3|51|محمد شبیر ولد محمد رزاق|دھنگڑاں|1000||
+N|3|52|محمد ناظر ولد کالا خان|لیٹڑیاں|1000||
+N|3|53|محمد حسن زیب ولد محمد نواز|لیٹڑیاں|2000||
+N|3|54|محمد نزاکت ولد محمد یونس|سیاہ|2000||
+N|3|55|محمد فیصل ولد محمد صابر|کھوڑا|2000|Residence unclear|1
+N|3|56|زاہد محمود صاحب|راول ڈیم|1500||
+N|3|57|محمد شہباز صاحب|علی پور|2000||
+N|3|58|محمد ارشد صاحب|راول ڈیم|1000||
+N|3|59|محمد کامران ولد محمد وحید|واہ|1000||
+N|3|60|گل محمد صاحب|رحمت آباد|1000||
+N|3|61|محمد امتیاز صاحب ولد محمد نذیر|انگوری|2000||
+N|3|62|ظہور حسین ولد محمد نیاز|راجواب|1000|Residence unclear|1
+N|3|63|دلنواز صاحب|دھیرکوٹ کھوڑاں|2000||
+N|3|64|محمد حق نواز ولد محمد جلال|دھنگڑاں|1000||
+N|3|65|محمد نواز ولد محمد جلال|دھنگڑاں|1000||
+N|3|66|رفعت لطیف ولد محمد لطیف|گوہڑہ|2000||
+N|3|67|اجمل حسین ولد محمد اشفاق|واہ|1000||
+N|3|68|ماسٹر عبدالخالق صاحب|دھیرکوٹ|1500||
+N|3|69|محمد منشی ولد محمد ہوشیار|واہ|1500||
+N|3|70|محمد دلاور ولد محمد سرور|واہ|2000|Name unclear|1
+N|4|71|محمد عرفان ولد دلدار خان|واہ|2000||
+N|4|72|محمد نواز ولد سلطان محمد|دھنگڑاں|1500||
+N|4|73|محمد ذیشان ولد محمد اشرف|دھنگڑاں|4000||
+N|4|74|ارشد محمود ولد صوبیدار محمد ارشاد|کوٹ سیاہ|1500|Residence unclear|1
+N|4|75|محمد انعام ولد محمد صدیق|گوہڑہ|2000||
+N|4|76|کیپٹن محمد رشید ولد محمد اکبر|دھنگڑاں|1000||
+N|4|77|محمد سعید ولد محمد یعقوب|گوہڑہ|1000||
+N|4|78|ذوالقرنین صاحب|حسن ابدال|2000||
+N|4|79|خادم حسین صاحب|کراچی|2000||
+N|4|80|محمد جمشید ولد محمد ایوب|سیاہ|2000||
+N|4|81|شہاب ظفر ولد محمد ظفر|واہ|1000||
+N|4|82|محمد ظہراب ولد کالا خان|واہ|1500||
+N|4|83|توصیف احمد ولد عبدالحمید|واہ|2000||
+N|4|84|محمد رضوان ولد عبدالحمید|واہ|1500||
+N|4|85|صوبیدار محمد مہربان ولد شیر خان|لیٹڑیاں|1500|Father's name unclear|1
+N|4|86|حاجی محمد طفیل ولد محمد خورشید|واہ|2000||
+N|4|87|ماسٹر طارق محمود ولد محمد حسین|لیٹڑیاں|2000||
+N|4|88|محمد شکیل سٹی ولد کیپٹن محمد رشید|سیاہ|2000||
+N|4|89|محمد توصیف ولد محمد خورشید|واہ|2000||
+N|4|90|زاہد محمود ولد محمد یعقوب|لیٹڑیاں|1000||
+N|4|91|ضیاء الحق ولد کیپٹن محمد مشتاق|واہ|1500||
+N|4|92|احمد نواز ولد سخی محمد|واہ|3000||
+N|4|93|محمد افضال ولد محمد حنیف|واہ|1000||
+N|4|94|اظہار الحق ولد عبدالرزاق|واہ|1000||
+N|5|95|محمد ابراہیم ولد فتح خان|ٹیکسلا|2000|Residence unclear|1
+N|5|96|امتیاز حسین ولد محمد اشرف|سیاہ|1500||
+N|5|97|انصار الحق ولد محمد ذوالفقار|سیاہ|2000||
+N|5|98|ماسٹر محمد الطاف ولد محمد الطاف|واہ|1000|Father's name unclear|1
+N|5|99|حاجی محمد امین ولد محمد اشرف|لیٹڑیاں|2000||
+N|5|100|محمد آصف ولد محمد مبین|بارہ کہو|1000||
+N|5|101|محمد سراج ولد گیلا خان|ماڈل ٹاؤن|1000|Father's name unclear|1
+N|5|102|محمد سرفراز ولد صوبیدار محمد ارشاد|لیٹڑیاں|1500||
+N|5|103|نعیم اختر ولد محمد صابر|واہ|1500||
+N|5|104|محمد لیاقت ولد محمد نیاز|واہ|2000||
+N|5|105|وکالت حسین ولد سید ہاشم|لیٹڑیاں|1000|Father's name unclear|1
+N|5|106|زاہد محمود ولد عبدالغفور|دھنگڑاں|1000||
+N|5|107|شاہد محمود ولد عبدالغفور|دھنگڑاں|1000||
+N|5|108|فراست حسین ولد محمد رحیم|دھنگڑاں|1000||
+N|5|109|گلریز اختر ولد محمد ظہیر|دھیرکوٹ کھوڑاں|2000||
+N|5|110|نصیر احمد ولد صوبیدار عنایت|دھیرکوٹ کھوڑاں|2500||
+N|5|111|لیاقت علی ولد محمد رزاق|دھیرکوٹ کھوڑاں|2000||
+N|5|112|ماسٹر امجد محمود ولد صوبیدار منظور خان|سیاہ|2000||
+N|5|113|میجر محمد فرید سٹی صاحب|گلزار قائد|2000||
+N|5|114|علی احمد سٹی صاحب ولد محمد ہلال|اسلام آباد|2000||
+N|5|115|محمد رضوان ولد محمد یونس|ترلائی|1000||
+N|5|116|حشمت محمود ولد محمد محمود|علی پور|1000||
+N|5|117|محمد آفتاب ولد محمد دلنواز|علی پور|1000||
+N|5|118|میجر محمد یوسف سٹی صاحب|اسلام آباد|1000||
+N|6|119|جمیل اختر ولد محمد سعید|حسن آباد|1000||
+N|6|120|صداقت محمود ولد محمود الحق|لیٹڑیاں|1500||
+N|6|121|محمد فیاض ولد خوشحال خان|لیٹڑیاں|1000||
+N|6|122|محمد شعیب ولد محمد ظریف|سرور ڈال|1500|Residence unclear|1
+N|6|123|ذوالفقار علی سٹی ولد محمد صادق|واہ|2000||
+N|6|124|وقار احمد ولد محمد خورشید|واہ|2000||
+N|6|126|کیپٹن محمد منیر ولد عزیز محمد|لیٹڑیاں|1000|Serial 125 not used in the notebook|
+N|6|127|پرویز اختر ولد محمد صادق|واہ|5000|First name unclear|1
+N|6|128|ذکاء الرحمن ولد امداد خان|سیاہ|1500||
+N|6|129|محمد افتخار ولد محمد اکرم|سیاہ|1000||
+N|6|130|محمد ظہیر ولد صوبیدار محمد رشید|سیاہ|1500||
+N|6|131|جمیل احمد ولد کیپٹن محمد رشید|سیاہ|1500||
+N|6|132|محمد عقیل ولد محمد رشید|سیاہ|1500||
+N|6|133|محمد عدیل ولد محمد رشید|سیاہ|1500||
+N|6|134|محمد یاسر ولد محمد جلال|سیاہ|1500||
+N|6|135|محمد اعجاز ولد محمد اشرف|لیٹڑیاں|1500|First name unclear|1
+N|6|136|حاجی محمد یاسین ولد محمد صادق|واہ|1000||
+N|6|137|ساجد محمود ولد حاجی محمد یاسین|واہ|1500||
+N|6|138|اظہار الحق ولد کیپٹن محمد مشتاق|انگوری|1000||
+N|6|139|محمد ہدایت ولد محمد حاکم|انگوری|1500|Name unclear|1
+N|6|140|محمد نواز ولد محمد فاضل|گلیاں|1500||
+N|6|141|محمد توصیف ولد محمد مبین|بارہ کہو|2000||
+N|6|142|کلیم نصیر سٹی|اسلام آباد|1500||
+N|7|143|محمد حامد اختر|بڑھانہ|1500|Residence unclear|1
+N|7|144|ظفر محمود ولد محمد بشارت|اسلام آباد|1000|A short word before اسلام آباد is unclear|1
+N|7|145|محمد نوید ولد امداد حسین|دھیرکوٹ کھوڑاں|2000||
+N|7|146|محمد نعیم ولد امداد حسین|دھیرکوٹ کھوڑاں|2000||
+N|7|147|ظفر محمود ولد غلام محمد|دھیرکوٹ کھوڑاں|1000|Father's name unclear|1
+N|7|148|مشرف حسین ولد محمد عارف|دھیرکوٹ کھوڑاں|1000||
+N|7|149|ماسٹر محمد شکیل ولد محمد ریاض|دھنگڑاں|1000||
+N|7|150|محمد ارشد ولد محمد خلیل|ملی|1000|Residence unclear|1
+N|7|151|محمد وحید ولد محمد ایوب|سیاہ (واہ)|1000||
+N|7|152|بابر شہزاد ولد منیر احمد|دھنگڑاں|1000||
+N|7|153|نوید شہزاد ولد منیر احمد|لاہور|2000||
+N|7|154|محمد ظہیر ولد محمد اشرف|دھنگڑاں|2000||
+N|7|155|امتیاز احمد ولد محمد صادق (پٹواری)|واہ|3000|Bracketed word unclear|1
+N|7|156|توصیف احمد ولد احمد نواز|واہ|1000||
+N|7|157|محمد آفتاب ولد عبدالرزاق|واہ|2000||
+N|7|158|محمد الجبار ولد عبدالرزاق|لیٹڑیاں|1000||
+N|7|159|محمد افسر ولد خوشحال خان|چلاورہ|5000|Name and residence unclear|1
+N|7|160|بختاور حسین ولد خوشحال خان|بیگالیاں|1500||
+N|7|161|محمد گلنواز ولد محمد سرور|لیٹڑیاں|1000|A word before the village name is unclear|1
+N|7|162|وجاہت رفیع ولد محمد یونس|واہ|1500|Name unclear|1
+N|7|163|محمد فراست ولد محمد ریاست|واہ|1500||
+N|7|165|طالب حسین ولد محمد محمود|واہ|1500|Serial 164 not used in the notebook|
+N|7|166|اورنگزیب ولد حق نواز خان|واہ|1500||
+N|8|167|ممتاز حسین ولد محمد اشرف|سیاہ|1000||
+N|8|168|انتخاب عالم ولد محمد یونس|گوہڑہ|1000||
+N|8|169|حق نواز ولد سخی محمد|واہ|3000||
+N|8|170|ظہور حسین ولد فضل حسین|دھیرکوٹ کھوڑاں|1000||
+N|8|171|محمد نذیر ولد بنوں خان|دھنگڑاں|1000|Father's name unclear|1
+N|8|172|عاشق حسین ولد علی حسین|سیاہ|1000||
+N|8|173|صداقت حسین ولد محمد یونس|سیاہ|1000||
+N|8|174|معین حسین ولد محمد صادق|سیاہ|1000||
+N|8|175|نعیم حسین ولد محمد صادق|سیاہ|1000||
+N|8|176|محمد اشفاق ولد محمد مختیار|حسن ابدال|1500|Father's name unclear|1
+N|8|177|اورنگزیب ولد محمد گلزار|راولپنڈی|1500||
+N|8|178|محمد ریاست ولد محمد اقبال|واہ|3000||
+N|8|179|محمد جمشید ولد منیر اختر|دھیرکوٹ کھوڑاں|2000||
+N|8|180|آصف رضا ولد محمد رضا|لیٹڑیاں|1000||
+N|8|181|سجاد علی ولد آفتاب حسین|ضیاء مسجد|3000||
+N|8|182|منور علی ولد آفتاب حسین|ضیاء مسجد|1500||
+N|8|183|شہباز علی ولد آفتاب حسین|کری روڈ|2000||
+N|8|184|عابد علی ولد آفتاب حسین|ضیاء مسجد|3000||
+N|8|185|مشتاق حسین ولد شامل خان|علی پور|1500|Father's name unclear; amount overwritten|1
+N|8|186|محمد خالد اختر صاحب|بڑھانہ|1000|Residence unclear|1
+N|8|187|محمد عابد اختر صاحب|بڑھانہ|2000|Residence unclear|1
+N|8|188|ارشد محمود ولد محمد فاضل|دھنگڑاں|3000||
+N|8|189|انوار الحق ولد محمد اشفاق|بیگالیاں|2000||
+N|9|190|محمد گلنواز صاحب|برہا پاس|10000|Residence unclear|1
+N|9|191|اظہر محمود ولد محمد رشید|ترلائی|1500||
+N|9|192|محمد شہزاد ولد محمد ظہیر|واہ|2000||
+N|9|193|محمد نصیر ولد علی اکبر|ترلائی|2000|A bracketed word after ترلائی is unclear|1
+N|9|194|راشد مشتاق صاحب|چارپان|1000|Residence unclear|1
+N|9|195|سجاد افضل ولد مکھن خان|علی پور|3000||
+N|9|196|محمد اشفاق ولد محمد مجانب|چلاورہ|1000|Father's name unclear|1
+N|9|197|محمد نوید ولد خان محمد|چلاورہ|1000||
+N|9|198|محمد نزاکت ولد محمد سرور|علی پور|1000||
+N|9|199|صوبیدار مکھن خان صاحب|گلیاں|5000||
+N|9|200|محمد کریم ولد محمد یوسف|دھنگڑاں|1000||
+N|9|201|محمد نصیر ولد محمد یوسف|دھنگڑاں|1000||
+N|9|202|قاسم مسعود ولد حاجی محمد مسعود|دھنگڑاں|1000||
+N|9|201|صوبیدار محمد ارشاد ولد علی حسین|دھنگڑاں|1000|Serial 201 used a second time|
+N|9|202|گل شاد ولد محمد ارشاد|دھنگڑاں|1000|Serial 202 used a second time|
+N|9|203|محمد بشیر ولد محمد اسماعیل|دھنگڑاں|2000||
+N|9|204|ارشد محمود ولد محمد گلستان|علی پور|2000||
+N|9|205|محمد شہباز ولد مہدی خان|حسن آباد|1500||
+N|9|206|محمد زرداد ولد مہدی خان|حسن آباد|1000||
+N|9|207|محمد ارشاد ولد فضل داد|واہ|1500||
+N|9|208|محمد سجاد ولد محمد اکرم|واہ|1000||
+N|9|209|محمد عرفات ولد فضل داد|واہ|1000||
+N|9|210|کامران طالب ولد طالب حسین|بیگالیاں|2000||
+N|10|211|گل عباس ولد محمد اشرف|بیگالیاں|1000||
+N|10|212|عبدالہادی ولد محمد وقار|لاہور|1000||
+N|10|213|ظفر محمود ولد شاہ میر خان|سیاہ|1500|Amount overwritten|
+N|10|214|صوبیدار محمد رشید صاحب|علی پور|1000||
+N|10|215|حافظ نزاکت ولد حاجی محمد نذیر|دھنگڑاں|1000||
+N|10|216|محمد مسکین ولد عزیز میر خان|واہ|2000|Father's name unclear|1
+N|10|217|طارق ضیاء ولد قربان علی|گدوال|1000|Amount overwritten|
+N|10|218|فیصل لطیف ولد محمد لطیف|حسن ابدال|2000||
+N|10|219|محمد اشتیاق ولد لیفٹیننٹ الطاف حسین|لیٹڑیاں|2000||
+N|10|220|محمد جلیل ولد صوبیدار محمد رشید|سیاہ|1000||
+N|10|221|ظفر محمود ولد محمد خورشید|واہ|1000||
+N|10|222|سرور اشرف ولد محمد اشرف|واہ|2000||
+N|10|223|محمد اسلام ولد محمد حنیف|واہ|2500||
+N|10|224|ذیشان دلنواز ولد محمد دلنواز|دھنگڑاں|2000||
+N|10|225|صابر حسین ولد محمد اسماعیل|دھنگڑاں|2000||
+N|10|226|شہاب افضل ولد ڈاکٹر محمد افضل|لیٹڑیاں|1000|A short word before the village name is unclear|1
+N|10|227|محمد سراج ولد محمد فاضل|دھنگڑاں|1000||
+N|10|228|عاصم مرتضیٰ ولد محمد مرتضیٰ|واہ|1000||
+N|10|229|محمد مصطفیٰ (مرحوم) ولد شاہ میر|سیاہ|1000||
+N|10|230|راشد محمود ولد محمد الیاس|انگوری|1000||
+N|10|231|شہزاد اختر ولد انوار حسین|واہ کینٹ|2000|Father's name and residence unclear|1
+N|10|232|ماسٹر محمد زبیر ولد امیر افسر|ڈھونگا کہنہ|2000||
+N|10|233|عاصم علی ولد شیر اعظم|علی پور|1500|Father's name unclear|1
+N|11|234|محمود حسین ولد دلدار حسین|چلاورہ|2000||
+N|11|235|محمد شہباز ولد محمد ظہیر|حسن آباد|2000|Father's name unclear|1
+N|11|236|شاہد محمود ولد بشارت|بیگالیاں|2000||
+N|11|237|بابو محمد شفیق ولد محمد افسر|سیاہ|1000||
+N|11|238|محمد وحید ولد حاجی محمد ریاض|واہ|2000||
+N|11|239|ابرار حسین ولد محمد نواز|لیٹڑیاں|2000||
+N|11|240|ظفر اقبال ولد محمد ہلال|واہ|1500||
+N|11|241|ندیم شہزاد ولد محمد ظہیر|دھنگڑاں|1000||
+N|11|242|محمد شیراز ولد محمد ظہیر|سیاہ|1000||
+N|11|243|آصف محمود سٹی|گارڈن ٹاؤن واہ|1500||
+N|11|244|واحد لطیف ولد محمد لطیف|گوہڑہ|5000||
+N|11|245|حافظ ظفیر الحق ولد عبدالخالق|دھنگڑاں|3000||
+N|11|246|طاہر محمود ولد محمد بشارت|بیگالیاں|2000||
+N|11|247|محمد بشارت ولد محمد مطیع|بیگالیاں|5000|Running total written beside: 31,000|
+N|11|248|محمد افتخار سٹی (مکھن خان)|—|5000||
+N|11|249|حافظ عتیق|سری|1000||
+N|11|250|شوکت حسین|علی پور|3000||
+N|11|251|صوبیدار رضا محمد سٹی ولد حاجی میر محمد سٹی|سیاہ|5000|Two lines of place names after the name are unclear; amount overwritten (5000 fits page total)|1
+N|11|252|حاجی سلیم|بارہ کہو|3000||
+N|11|253|ڈاکٹر اشفاق|بدو|500|Residence unclear|1
+N|11|254|انتخاب علی شاہ|واہ کینٹ|1000||
+N|11|255|محمد زبیر بھٹی|واہ کینٹ|5000||
+N|11|256|محمد رحیم|واہ کینٹ مدینہ ٹاؤن|1000||
+N|12|257|طلحہ بھٹی|—|2000|Bracketed words after the name are unclear|1
+N|12|258|عاطف رضا|آفیسرز کالونی|2000||
+N|12|259|محب علی شاہ|—|500||
+N|12|260|عبدالرحمن|مدینہ ٹاؤن|2000||
+N|12|261|قیصر نواز|مدینہ ٹاؤن|1000||
+N|12|262|شازیہ|بدو|500|Residence unclear|1
+N|12|263|قاری ناصر ارشاد|—|2000||
+N|12|264|پرویز اقبال|ٹیکسلا|5000||
+N|12|265|مولانا جواد خان|مدینہ ٹاؤن|5000||
+N|12|266|محمد سراج ولد محمد رحمٰن|سیاہ|2000||
+N|12|267|ندیم اکبر ملک|واہ کینٹ|1000||
+N|12|268|شاہد رسول|واہ کینٹ|1500||
+N|12|269|علی رضا شاہ|مدینہ ٹاؤن|1000||
+N|12|270|سہیل اقبال|واہ کینٹ|1000||
+N|12|271|محمد ندیم|واہ کینٹ|1000|Bracketed word after the name is unclear|1
+N|12|272|محمد بلال وارث|واہ کینٹ|5000||
+N|12|273|محمد حسین (جواد)|مدینہ ٹاؤن|2000||
+N|12|274|چوہدری اظہر|بوئی موڑ|5000|Tick mark beside serial|
+N|12|275|عبیدالرحمن|بستی|5000|Residence unclear|1
+N|12|276|محمد منیب اظہر|—|2000|First name unclear|1
+N|12|277|چوہدری محمد اظہر|—|3000|Tick mark beside serial|
+N|12|278|چوہدری یاور|—|2000||
+N|12|279|احمد سعید سٹی|—|1000||
+N|12|280|جمروز خان|مدینہ ٹاؤن|2000||
+N|13|281|اسامہ ضرغام|واہ کینٹ|5000||
+N|13|282|نجم الحسن|واہ کینٹ|1000||
+N|13|283|علی حمزہ|مدینہ ٹاؤن|2000||
+N|13|284|عامر عرفات|—|1000||
+N|13|285|باسط رفیق جٹ|New City|2000|First name overwritten|1
+N|13|286|عامر نواز اعوان|مدینہ ٹاؤن|500||
+N|13|287|قاری انجم|—|1000|A word after the name is unclear|1
+N|13|288|اسامہ عمران|Aeyron|2000||
+N|13|289|عبداللہ بھٹی|Lahore (CUI)|5000||
+N|13|290|وحید احمد|Aeyron|1000||
+N|13|291|وقار ملک|Area 26|1000||
+N|13|292|محمد عمیر|CUI|5000||
+N|13|293|کاشان لطیف|Area 26|5000||
+N|13|294|احمد ظہیر|Gudwal|1000||
+N|13|295|طاہا شرجیل|Aeyron|1000||
+N|13|296|محمد وقار|Aeyron|1000||
+N|13|297|محمد افضال|واہ کینٹ|5000||
+N|13|298|وقار طاہر|Aeyron|1000||
+N|13|299|عابد خان|CUI|3000||
+N|13|300|محمد عثمان|CUI|5000||
+N|13|301|… خان|CUI|10000|First name unreadable|1
+N|13|302|قاری سعد امین|—|1000||
+N|13|303|علی حسن خٹک|—|1000|Surname unclear|1
+N|13|304|کامران خان|مدینہ ٹاؤن|1000||
+N|14|—|کاشف خٹک|مدینہ ٹاؤن|1000|No serial (after 304)|
+N|14|—|محمد ارباب|سیاہ|1000|No serial|
+N|14|—|آصف رضا ولد محمد منیر|مدینہ ٹاؤن|2000|No serial|
+N|14|—|محمد سلیم|سیاہ|1000|No serial|
+N|14|—|مغیث|سیاہ|500|No serial|
+N|14|—|فولاد|سیاہ|1000|No serial; added later (photo new.jpeg); name unclear|1
+N|14|—|سٹی سراج|سیاہ|1000|No serial; added later|
+N|14|—|آفتاب ولد کالا|سیاہ|1500|No serial; added later|
+N|14|—|سراج الحق|لیٹڑیاں|1000|No serial; added later|
+N|14|—|افتخار ولد کالا|سیاہ|1000|No serial; added later|
+</script>
+
+<script id="dict" type="text/plain">
+آباد=Abad ابدال=Abdal ابرار=Abrar ابراہیم=Ibrahim اجمل=Ajmal احمد=Ahmad اختر=Akhtar ادریس=Idrees ارباب=Arbab ارشاد=Irshad ارشد=Arshad اسامہ=Usama اسلام=Islam اسلم=Aslam اسماعیل=Ismail اشتیاق=Ishtiaq اشرف=Ashraf اشفاق=Ashfaq آصف=Asif اظہار=Izhar اظہر=Azhar اعجاز=Ijaz اعظم=Azam اعوان=Awan آفتاب=Aftab افتخار=Iftikhar افریز=Afraiz افسر=Afsar افضال=Afzaal افضل=Afzal آفیسرز=Officers اقبال=Iqbal اکبر=Akbar اکرم=Akram الجبار=Al-Jabbar الحسن=ul-Hassan الحق=ul-Haq الرحمان=ur-Rehman الرحمن=ur-Rehman الطاف=Altaf الیاس=Ilyas امتیاز=Imtiaz امجد=Amjad امداد=Imdad امیر=Ameer امین=Ameen انتخاب=Intikhab انجم=Anjum انصار=Ansar انعام=Inam انگوری=Angoori انوار=Anwar اورنگزیب=Aurangzeb ایوب=Ayub
+بابر=Babar بابو=Babu باجی=Baji بارہ=Bara باسط=Basit بختاور=Bakhtawar بدو=Baddo برہا=Barha بڑاکھر=Barakhar بڑھانہ=Barhana بستی=Basti بشارت=Basharat بشیر=Bashir بلال=Bilal بنوں=Bannu بھٹی=Bhatti بوئی=Boti بیگالیاں=Begalian پاس=Pas پٹواری=Patwari پرویز=Pervaiz پور=Pur
+تاج=Taj ترلائی=Tarlai تنویر=Tanveer توصیف=Tauseef ٹاؤن=Town ٹیکسلا=Taxila جان=Jan جاوید=Javed جٹ=Jutt جلال=Jalal چلاورہ=Chalawra جلیل=Jalil جمروز=Jamroz جمشید=Jamshed جمیل=Jameel جنید=Junaid جواد=Jawad چارپان=Charhan چوہدری=Chaudhry
+حاجی=Haji حافظ=Hafiz حاکم=Hakim حامد=Hamid حسن=Hassan حسین=Hussain حشمت=Hashmat حفیظ=Hafeez حق=Haq حمدان=Hamdan حمزہ=Hamza حنیف=Hanif خادم=Khadim خالد=Khalid خان=Khan خٹک=Khattak خلیل=Khalil خورشید=Khurshid خوشحال=Khushal
+داد=Dad دلاور=Dilawar دلدار=Dildar دلنواز=Dilnawaz دھار=Dhaar دھنگڑاں=Dhangran دھیرکوٹ=Dhirkot ڈاکٹر=Dr. ڈال=Daal ڈھنگڑال=Dhangral ڈھونگا=Dhonga ڈیم=Dam ذکاء=Zaka ذوالفقار=Zulfiqar ذوالقرنین=Zulqarnain ذیشان=Zeeshan
+راجہ=Raja راجواب=Rajwab راشد=Rashid راول=Rawal راولپنڈی=Rawalpindi رحمت=Rehmat رحمٰن=Rehman رحیم=Rahim رزاق=Razzaq رسول=Rasool رشید=Rasheed رضا=Raza رضوان=Rizwan رفعت=Riffat رفیع=Rafi رفیق=Rafiq روبینہ=Rubina روڈ=Road ریاست=Riasat ریاض=Riaz زاہد=Zahid زبیر=Zubair زرداد=Zardad زیب=Zaib
+ساجد=Sajid سٹی=Satti سجاد=Sajjad سخی=Sakhi سراج=Siraj سرفراز=Sarfraz سرور=Sarwar سری=Sari سعد=Saad سعید=Saeed سلطان=Sultan سلیم=Saleem سہیل=Sohail سیاہ=Siyah سید=Syed شاد=Shad شازیہ=Shazia شامل=Shamil شاہ=Shah شاہد=Shahid شبیر=Shabbir شرجیل=Sharjeel شعیب=Shoaib شفیق=Shafiq شکریال=Shakrial شکیل=Shakeel شمشیر=Shamsher شہاب=Shahab شہباز=Shahbaz شہزاد=Shahzad شوکت=Shaukat شیر=Sher شیراز=Sheraz
+صابر=Sabir صاحب=Sahib صادق=Sadiq صداقت=Sadaqat صدیق=Siddique صوبیدار=Subedar ضرغام=Zargham ضیاء=Zia طارق=Tariq طالب=Talib طاہا=Taha طاہر=Tahir طفیل=Tufail طلحہ=Talha ظریف=Zareef ظفر=Zafar ظفیر=Zafeer ظہراب=Zohrab ظہور=Zahoor ظہیر=Zaheer
+عابد=Abid عارف=Arif عاشق=Ashiq عاصم=Asim عاطف=Atif عالم=Alam عامر=Amir عباس=Abbas عبدالحمید=Abdul-Hameed عبدالخالق=Abdul-Khaliq عبدالرافع=Abdul-Rafay عبدالرحمن=Abdul-Rehman عبدالرزاق=Abdul-Razzaq عبدالغفور=Abdul-Ghafoor عبدالکریم=Abdul-Karim عبداللہ=Abdullah عبدالہادی=Abdul-Hadi عبیدالرحمن=Ubaid-ur-Rehman عتیق=Ateeq عثمان=Usman عدیل=Adeel عرفات=Arafat عرفان=Irfan عزیز=Aziz عقیل=Aqeel علی=Ali عمران=Imran عمیر=Umair عنایت=Inayat غفار=Ghaffar غفران=Ghufran غلام=Ghulam
+فاضل=Fazil فتح=Fateh فولاد=Faulad فراز=Faraz فراست=Farasat فرید=Fareed فضل=Fazal فیاض=Fayyaz فیصل=Faisal قادر=Qadir قاری=Qari قاسم=Qasim قائد=Quaid قربان=Qurban قیصر=Qaiser
+کاشان=Kashan کاشف=Kashif کالا=Kala کالونی=Colony کامران=Kamran کراچی=Karachi کری=Kuri کریم=Karim کلیم=Kaleem کہنہ=Khetar کہو=Kahu کھوڑا=Khora کھوڑاں=Khoran کوٹ=Kot کیپٹن=Captain کینٹ=Cantt گارڈن=Garden گدوال=Gudwal گڑاوٹ=Garawat گل=Gul گلریز=Gulraiz گلزار=Gulzar گلستان=Gulistan گلفراز=Gulfraz گلنواز=Gulnawaz گلیاں=Galian گوہڑہ=Gohra گیلا=Gela
+لال=Lal لاہور=Lahore لطیف=Latif لیاقت=Liaqat لیٹڑیاں=Larain لیفٹیننٹ=Lieutenant ماجد=Majid ماڈل=Model ماسٹر=Master مانسہرہ=Mansehra مبین=Mubeen مجانب=Mujanib محب=Muhib محمد=Muhammad محمود=Mehmood مختیار=Mukhtiar مدینہ=Madina مرتضیٰ=Murtaza مرحوم=late مسجد=Masjid مسعود=Masood مسکین=Miskeen مشتاق=Mushtaq مشرف=Musharraf مصطفیٰ=Mustafa مطیع=Mutee مظلوم=Mazloom معین=Moeen مغیث=Mughees مقبول=Maqbool مکھن=Makhan ملک=Malik ملی=Mali ممتاز=Mumtaz منشی=Munshi منظور=Manzoor منور=Munawar منیب=Muneeb منیر=Munir مہدی=Mehdi مہربان=Mehrban موڑ=Mor مولانا=Maulana میجر=Major میر=Mir
+ناصر=Nasir ناظر=Nazir نثار=Nisar نجم=Najam نجیب=Najeeb ندیم=Nadeem نذیر=Nazeer نزاکت=Nazakat نصیر=Naseer نعیم=Naeem نقیب=Naqeeb نواز=Nawaz نوید=Naveed نیاز=Niaz ہاشم=Hashim ہدایت=Hidayat ہلال=Hilal ہوشیار=Hoshiar واجد=Wajid واحد=Wahid وارث=Waris واہ=Wah وجاہت=Wajahat وحید=Waheed وقار=Waqar وکالت=Wakalat ولد=s/o یاسر=Yasir یاسین=Yaseen یاور=Yawar یٰسین=Yaseen یعقوب=Yaqoob یوسف=Yousaf یونس=Younas
+</script>
+
+<script>
+const DICT={};document.getElementById('dict').textContent.trim().split(/\s+/).forEach(p=>{const k=p.indexOf('=');DICT[p.slice(0,k)]=p.slice(k+1).replace(/-/g,' ')});
+const DICT0={...DICT};
+const URW=/[^\s()—…A-Za-z0-9]+/g;
+const VD={...DICT}; // residence spellings: base dictionary + the user's residence corrections (never applied to names)
+const roman=(s,D=DICT)=>s==='—'?'':s.replace(URW,w=>D[w]||w).replace(/\s+/g,' ').trim();
+// ---- proofreading edits (kept in this browser; exportable) ----
+const LS='nandraa-edits-v1';
+let ED={dict:{},name:{},vil:{},vrow:{}};
+try{const s=JSON.parse(localStorage.getItem(LS)||'null');if(s)ED={dict:s.dict||{},name:s.name||{},vil:s.vil||{},vrow:s.vrow||{}}}catch(e){}
+delete ED.vil["—"];
+Object.assign(VD,ED.dict);
+function saveED(){try{localStorage.setItem(LS,JSON.stringify(ED))}catch(e){}}
+function recalc(){rows.forEach(r=>{r.en=ED.name[r.i]??roman(r.name);r.ven=r.vil==='—'?(ED.vrow[r.i]??''):(ED.vil[r.vil]??roman(r.vil,VD))})}
+// work out which Urdu word(s) an English edit belongs to; null = cannot tell (keep as a one-off override)
+function wordChanges(ur,text){
+  const P=ur.split(/\s+/).filter(Boolean).map(t=>{const core=(t.match(URW)||[''])[0];return {t,core,w:roman(t,VD).split(' ')}});
+  const ow=[],own=[];P.forEach((p,j)=>p.w.forEach(x=>{ow.push(x);own.push(j)}));
+  const nw=text.split(/\s+/).filter(Boolean);
+  let p=0;while(p<ow.length&&p<nw.length&&ow[p]===nw[p])p++;
+  let s=0;while(s<ow.length-p&&s<nw.length-p&&ow[ow.length-1-s]===nw[nw.length-1-s])s++;
+  if(p+s>=ow.length)return null;
+  const a=own[p],b=own[ow.length-s-1];
+  while(p>0&&own[p-1]===a)p--;
+  while(s>0&&own[ow.length-s]===b)s--;
+  const mid=nw.slice(p,nw.length-s);if(!mid.length)return null;
+  const strip=(tok,en)=>{if(!tok.core||!(tok.core in VD))return null;const [pre,post]=tok.t.split(tok.core);
+    if(!en.startsWith(pre)||!en.endsWith(post))return null;const v=en.slice(pre.length,en.length-post.length).trim();return v?{ur:tok.core,en:v}:null};
+  if(a===b){const c=strip(P[a],mid.join(' '));return c?[c]:null}
+  if(mid.length!==b-a+1)return null;
+  const out=[];for(let j=a;j<=b;j++){if(P[j].w.length!==1)return null;if(P[j].w[0]!==mid[j-a]){const c=strip(P[j],mid[j-a]);if(!c)return null;out.push(c)}}
+  return out.length?out:null;
+}
+let UNDO=null;
+function commitEdit(r,field,text){
+  text=text.replace(/\s+/g,' ').trim();
+  const cur=field==='en'?r.en:r.ven, ur=field==='en'?r.name:r.vil;
+  if(text===cur)return;
+  UNDO=JSON.stringify(ED);
+  const before=rows.map(x=>x.en+'|'+x.ven);
+  const setOv=v=>{if(field==='en'){if(v==null)delete ED.name[r.i];else ED.name[r.i]=v}else if(r.vil==='—'){if(v==null)delete ED.vrow[r.i];else ED.vrow[r.i]=v}else{if(v==null)delete ED.vil[r.vil];else ED.vil[r.vil]=v}};
+  let msg;
+  if(!text){setOv(null);msg='Reset to the automatic spelling'}
+  else if(field==='en'){setOv(text===roman(ur)?null:text);msg='Name saved for this entry only'}
+  else{
+    setOv(null);
+    const ch=ur==='—'?null:wordChanges(ur,text);
+    if(ch){ch.forEach(c=>{VD[c.ur]=c.en;if(DICT0[c.ur]===c.en)delete ED.dict[c.ur];else ED.dict[c.ur]=c.en});msg='Residence: '+ch.map(c=>`${c.ur} → “${c.en}”`).join(', ')}
+    if(roman(ur,VD)!==text){setOv(text);if(!ch)msg=r.vil==='—'?'Residence saved for this entry only (none was written in the notebook)':'Saved for every entry with this residence'}
+  }
+  saveED();recalc();
+  const n=rows.filter((x,j)=>x.en+'|'+x.ven!==before[j]).length;
+  refreshCells();toast(`${msg} · ${n} ${n===1?'entry':'entries'} updated`,true);
+}
+function loadED(obj){ED={dict:obj.dict||{},name:obj.name||{},vil:obj.vil||{},vrow:obj.vrow||{}};delete ED.vil["—"];Object.keys(VD).forEach(k=>VD[k]=DICT0[k]);Object.assign(VD,ED.dict);saveED();recalc();refreshCells()}
+function toast(html,undo){const t=document.getElementById('toast');t.innerHTML=esc(html)+(undo&&UNDO?' <button id="undo">Undo</button>':'');t.classList.add('on');
+  clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),7000);
+  const u=document.getElementById('undo');if(u)u.onclick=()=>{loadED(JSON.parse(UNDO));UNDO=null;toast('Change undone')}}
+const EV={M:{name:"Mehndi",ur:"مہندی",date:"2026-04-03"},B:{name:"Baraat (Salami)",ur:"بارات (سلامی)",date:"2026-04-04"},N:{name:"Shadi Neondra",ur:"نیندرہ شادی",date:"2026-04-05"}};
+const WRITTEN={"M|1":null,"M|2":null,"B|1":null,"B|2":null,"N|1":33000,"N|2":41500,"N|3":34000,"N|4":42000,"N|5":38000,"N|6":35000,"N|7":37000,"N|8":39000,"N|9":44500,"N|10":33500,"N|11":55500,"N|12":54500,"N|13":61500,"N|14":null};
+const WRITTEN_EVENT={M:67500,B:92500};
+const rows=document.getElementById('data').textContent.trim().split('\n').map((l,i)=>{
+  const [e,p,sn,name,vil,amt,note,chk]=l.split('|');
+  return {i:i+1,e,p:+p,sn,name,vil,en:roman(name),ven:roman(vil),amt:+amt,note:note||'',chk:chk==='1'};
+});
+recalc();
+// source photo of every page: file, whether it must be turned upright, and [row index, y] anchors (upright 960x1280 px)
+const W='WhatsApp Image 2026-11-14 at ';
+const IMG={
+ "M|1":{f:W+'5.51.09 PM.jpeg',a:[[0,175],[14,657],[29,1227]]},
+ "M|2":{f:W+'5.51.08 PM (2).jpeg',a:[[0,192],[12,665],[23,1115],[24,1152]]},
+ "B|1":{f:W+'5.51.08 PM (1).jpeg',a:[[0,125],[14,617],[29,1205]]},
+ "B|2":{f:W+'5.51.08 PM.jpeg',a:[[0,105],[9,425],[17,722],[18,797],[24,1035]]},
+ "N|1":{f:W+'5.51.07 PM (1).jpeg',a:[[0,185],[11,685],[22,1237]]},
+ "N|2":{f:W+'5.51.07 PM.jpeg',rot:1,a:[[0,122],[12,652],[23,1157]]},
+ "N|3":{f:W+'5.51.06 PM.jpeg',rot:1,a:[[0,147],[11,639],[22,1182]]},
+ "N|4":{f:W+'5.51.05 PM.jpeg',rot:1,a:[[0,119],[12,627],[23,1151]]},
+ "N|5":{f:W+'5.50.53 PM.jpeg',rot:1,a:[[0,184],[11,646],[23,1207]]},
+ "N|6":{f:W+'5.50.49 PM.jpeg',rot:1,a:[[0,75],[12,636],[22,1132]]},
+ "N|7":{f:W+'5.50.48 PM.jpeg',rot:1,a:[[0,100],[12,661],[22,1172]]},
+ "N|8":{f:W+'5.50.47 PM (1).jpeg',rot:1,a:[[0,75],[12,636],[22,1154]]},
+ "N|9":{f:W+'5.50.47 PM.jpeg',rot:1,a:[[0,125],[13,717],[22,1176]]},
+ "N|10":{f:W+'5.50.46 PM (1).jpeg',rot:1,a:[[0,116],[11,608],[22,1151]]},
+ "N|11":{f:W+'5.50.46 PM.jpeg',rot:1,a:[[0,134],[12,671],[16,869],[17,945],[18,1022],[22,1226]]},
+ "N|12":{f:W+'5.50.45 PM (1).jpeg',rot:1,a:[[0,81],[12,614],[23,1154]]},
+ "N|13":{f:W+'5.50.45 PM.jpeg',rot:1,a:[[0,103],[12,661],[23,1222]]},
+ "N|14":{f:'new.jpeg',h:36,a:[[0,470],[4,695],[9,1010]]}
+};
+const cnt={};rows.forEach(r=>{const k=r.e+'|'+r.p;r.pi=cnt[k]=(cnt[k]??-1)+1;r.img=IMG[k].f});
+function rowY(r){const a=IMG[r.e+'|'+r.p].a;let j=1;while(j<a.length-1&&r.pi>a[j][0])j++;
+  const [i0,y0]=a[j-1],[i1,y1]=a[j];return y0+(r.pi-i0)*(y1-y0)/(i1-i0)}
+// every photo, in notebook order (used by the Photos view)
+const PH=Object.keys(IMG).map(k=>{const [e,p]=k.split('|');return {...IMG[k],key:k,cap:`${EV[e].name} – page ${p}`}});
+PH.push({f:W+'5.50.44 PM.jpeg',rot:1,cap:'Shadi Neondra – page 14, earlier photo (first 5 entries only)'});
+// draw a photo upright (960x1280 units) on a canvas; resolves with a context scaled to those units
+function paint(cv,m,scale){return new Promise((ok,bad)=>{const im=new Image();
+  im.onload=()=>{const ctx=cv.getContext('2d');cv.width=960*scale;cv.height=1280*scale;ctx.setTransform(scale,0,0,scale,0,0);ctx.save();
+    if(m.rot){ctx.translate(0,1280);ctx.rotate(-Math.PI/2)}
+    ctx.drawImage(im,0,0);ctx.restore();ok(ctx)};
+  im.onerror=bad;im.src=encodeURIComponent(m.f)})}
+let Z=1,PI=-1;
+function setZoom(z){Z=Math.min(4,Math.max(1,z));document.getElementById('pcv').style.width=Z*100+'%'}
+function openDlg(m,cap,note,y,h){
+  const dlg=document.getElementById('proof'),cv=document.getElementById('pcv'),box=document.getElementById('pbox');
+  document.getElementById('pcap').innerHTML=cap;document.getElementById('pnote').textContent=note;
+  const a=document.getElementById('plink');a.href=encodeURIComponent(m.f);a.textContent=m.f;
+  dlg.classList.toggle('nav',PI>=0);
+  paint(cv,m,1).then(ctx=>{
+    if(y!=null){ctx.fillStyle='rgba(0,0,0,.28)';ctx.fillRect(0,0,960,y-h);ctx.fillRect(0,y+h,960,1280-y-h);
+      ctx.strokeStyle='#e11d48';ctx.lineWidth=4;ctx.strokeRect(4,y-h,952,2*h)}
+    if(!dlg.open)dlg.showModal();
+    box.scrollTop=y==null?0:Math.max(0,y*cv.clientHeight/1280-box.clientHeight/2);
+    box.scrollLeft=y==null?0:Math.max(0,cv.clientWidth-box.clientWidth);
+  }).catch(()=>{if(!dlg.open)dlg.showModal();cv.width=cv.width;document.getElementById('pcap').innerHTML+='<br><span class="bad">Photo not found – it must sit next to this page.</span>'});
+}
+function showProof(r){
+  const m=IMG[r.e+'|'+r.p];PI=-1;setZoom(innerWidth<720?2:1);
+  openDlg(m,`<b>${esc(r.en)}</b> · <span dir="rtl">${esc(r.name)}</span><br>${EV[r.e].name}, page ${r.p}, serial ${esc(r.sn)} · ${esc(r.ven||'')} · <b>Rs ${fmt(r.amt)}</b>`,
+    'Red box = this entry in the notebook (position is approximate, ±1 line).',rowY(r),m.h||(m.rot?27:25));
+}
+function showPhoto(i){
+  PI=(i+PH.length)%PH.length;setZoom(1);const m=PH[PI];
+  openDlg(m,`<b>${esc(m.cap)}</b><br>Photo ${PI+1} of ${PH.length}${m.key?' · '+photoStat(m.key):''}`,'',null,0);
+}
+function photoStat(k){const [e,p]=k.split('|');const r=rows.filter(x=>x.e===e&&x.p===+p);return `${r.length} entries · Rs ${fmt(sum(r))}`}
+function buildGallery(){
+  const g=document.getElementById('gallery');if(g.childElementCount)return;
+  PH.forEach((m,i)=>{const f=document.createElement('figure');f.dataset.i=i;
+    f.innerHTML=`<canvas></canvas><figcaption><b>${esc(m.cap)}</b>${m.key?'<br>'+photoStat(m.key):''}</figcaption>`;g.appendChild(f);
+    paint(f.firstChild,m,.4).catch(()=>{f.querySelector('figcaption').innerHTML+='<br><span class="bad">photo not found</span>'})});
+  g.onclick=ev=>{const f=ev.target.closest('figure');if(f)showPhoto(+f.dataset.i)};
+}
+const fmt=n=>n.toLocaleString('en-US');
+const sum=a=>a.reduce((s,r)=>s+r.amt,0);
+let state={e:'',q:'',vil:'',chk:false,k:'i',dir:1,edit:false};
+
+// cards
+const cards=document.getElementById('cards');
+cards.innerHTML=Object.keys(EV).map(k=>{const r=rows.filter(x=>x.e===k);
+  return `<div class="card ${k.toLowerCase()}"><div class="lbl">${EV[k].name} · ${EV[k].date}</div><div class="val">Rs ${fmt(sum(r))}</div><div class="sub">${r.length} entries · avg Rs ${fmt(Math.round(sum(r)/r.length))}</div></div>`}).join('')
+  +`<div class="card g"><div class="lbl">Grand total</div><div class="val">Rs ${fmt(sum(rows))}</div><div class="sub">${rows.length} entries · ${rows.filter(r=>r.chk).length} need a check</div></div>`;
+
+// tabs
+const tabs=document.getElementById('tabs');
+tabs.innerHTML=`<button data-e="" class="on">All</button>`+Object.keys(EV).map(k=>`<button data-e="${k}">${EV[k].name}</button>`).join('')+`<button data-e="photos">📷 Photos only</button>`;
+tabs.onclick=ev=>{const b=ev.target.closest('button');if(!b)return;[...tabs.children].forEach(c=>c.classList.toggle('on',c===b));
+  const ph=b.dataset.e==='photos';document.body.classList.toggle('photos',ph);
+  if(ph){buildGallery();return}
+  state.e=b.dataset.e;render()};
+const SORTS={i:['i',1],amtd:['amt',-1],amta:['amt',1],en:['en',1],ven:['ven',1]};
+document.getElementById('sortsel').onchange=ev=>{[state.k,state.dir]=SORTS[ev.target.value];render()};
+
+// village list + summary (rebuilt after every correction)
+const vsel=document.getElementById('vil');
+function buildVillages(){
+  const en={},vmap={};rows.forEach(r=>{en[r.vil]=r.vil==='—'?'':r.ven;(vmap[r.vil]=vmap[r.vil]||{n:0,t:0});vmap[r.vil].n++;vmap[r.vil].t+=r.amt});
+  const keep=vsel.value;vsel.length=1;
+  Object.keys(en).filter(v=>v!=='—').sort((a,b)=>en[a].localeCompare(en[b])).forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=en[v]===v?v:en[v]+' — '+v;vsel.appendChild(o)});
+  vsel.value=keep;
+  document.querySelector('#tv tbody').innerHTML=Object.entries(vmap).sort((a,b)=>b[1].t-a[1].t).map(([v,o])=>`<tr><td>${esc(en[v])}</td><td class="ur">${esc(v==='—'?'(not written)':v)}</td><td class="num">${o.n}</td><td class="num">${fmt(o.t)}</td></tr>`).join('');
+}
+vsel.onchange=()=>{state.vil=vsel.value;render()};
+document.getElementById('q').oninput=ev=>{state.q=ev.target.value.trim().toLowerCase();render()};
+document.getElementById('onlychk').onchange=ev=>{state.chk=ev.target.checked;render()};
+document.querySelectorAll('#t thead th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;state.dir=state.k===k?-state.dir:1;state.k=k;render()});
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function current(){
+  let r=rows.filter(x=>(!state.e||x.e===state.e)&&(!state.vil||x.vil===state.vil)&&(!state.chk||x.chk)
+    &&(!state.q||(x.en+' '+x.ven+' '+x.name+' '+x.vil+' '+x.sn+' '+x.note+' '+EV[x.e].name).toLowerCase().includes(state.q)));
+  const k=state.k;
+  r.sort((a,b)=>{let x=a[k],y=b[k];
+    if(k==='sn'){x=parseInt(x)||9999;y=parseInt(y)||9999}
+    const c=(typeof x==='number')?x-y:String(x).localeCompare(String(y),'ur');
+    return (c||a.i-b.i)*state.dir});
+  return r;
+}
+function render(){
+  const r=current();
+  document.querySelector('#t tbody').innerHTML=r.map(x=>`<tr data-i="${x.i}" title="Tap to see this entry in the notebook photo" class="${x.chk?'chk':''}"><td>${x.i}</td><td><span class="tag ${x.e}">${EV[x.e].name}</span></td><td>${x.p}</td><td>${esc(x.sn)}</td><td class="ed" data-f="en"${state.edit?' contenteditable="true" spellcheck="false"':''}>${esc(x.en)}</td><td class="ur">${esc(x.name)}</td><td class="ed" data-f="ven"${state.edit?' contenteditable="true" spellcheck="false"':''}>${esc(x.ven)}</td><td class="ur">${esc(x.vil)}</td><td class="num">${fmt(x.amt)}</td><td class="note">${esc(x.note)}${x.chk?'<span class="q">check</span>':''}</td></tr>`).join('');
+  document.getElementById('ft').textContent='Rs '+fmt(sum(r));
+  document.getElementById('status').innerHTML=`Showing <b>${r.length}</b> of ${rows.length} entries · total <b>Rs ${fmt(sum(r))}</b>`;
+}
+render();
+const tb=document.querySelector('#t tbody');
+tb.onclick=ev=>{if(state.edit&&ev.target.closest('td.ed'))return;const tr=ev.target.closest('tr');if(tr)showProof(rows[tr.dataset.i-1])};
+tb.addEventListener('focusout',ev=>{const td=ev.target.closest('td.ed');if(!td||!state.edit)return;const r=rows[td.parentNode.dataset.i-1];
+  if(td.dataset.cancel){delete td.dataset.cancel;td.textContent=r[td.dataset.f];return}
+  commitEdit(r,td.dataset.f,td.textContent);td.textContent=r[td.dataset.f]});
+tb.addEventListener('keydown',ev=>{const td=ev.target.closest('td.ed');if(!td)return;
+  if(ev.key==='Enter'){ev.preventDefault();td.blur()}
+  if(ev.key==='Escape'){td.dataset.cancel=1;td.blur()}});
+function refreshCells(){
+  tb.querySelectorAll('tr').forEach(tr=>{const r=rows[tr.dataset.i-1];tr.querySelectorAll('td.ed').forEach(td=>{if(document.activeElement!==td&&td.textContent!==r[td.dataset.f])td.textContent=r[td.dataset.f]})});
+  buildVillages();
+  const n=Object.keys(ED.dict).length+Object.keys(ED.name).length+Object.keys(ED.vil).length+Object.keys(ED.vrow).length;
+  document.getElementById('edcount').textContent=n?`${n} correction${n===1?'':'s'} saved in this browser`:'No corrections yet';
+}
+const edbtn=document.getElementById('edit');
+edbtn.onclick=()=>{state.edit=!state.edit;edbtn.classList.toggle('ghost',!state.edit);edbtn.textContent=state.edit?'Editing ON – click to finish':'✎ Edit English spellings';
+  document.body.classList.toggle('editing',state.edit);render()};
+document.getElementById('exp').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(ED,null,1)],{type:'application/json'}));a.download='nandraa-corrections.json';a.click()};
+document.getElementById('imp').onchange=ev=>{const f=ev.target.files[0];if(!f)return;f.text().then(t=>{try{UNDO=JSON.stringify(ED);loadED(JSON.parse(t));toast('Corrections loaded',true)}catch(e){toast('That file could not be read')}});ev.target.value=''};
+document.getElementById('rst').onclick=()=>{UNDO=JSON.stringify(ED);loadED({});toast('All corrections removed',true)};
+document.getElementById('proof').onclick=ev=>{const id=ev.target.id;
+  if(id==='proof'||id==='pclose')ev.currentTarget.close();
+  else if(id==='pzin')setZoom(Z+.5);else if(id==='pzout')setZoom(Z-.5);
+  else if(id==='pprev')showPhoto(PI-1);else if(id==='pnext')showPhoto(PI+1)};
+document.addEventListener('keydown',ev=>{if(!document.getElementById('proof').open||PI<0)return;if(ev.key==='ArrowLeft')showPhoto(PI-1);if(ev.key==='ArrowRight')showPhoto(PI+1)});
+
+refreshCells();
+
+// page reconciliation
+let ph='';
+Object.keys(WRITTEN).forEach(key=>{const [e,p]=key.split('|');const r=rows.filter(x=>x.e===e&&x.p===+p);const s=sum(r),w=WRITTEN[key];
+  ph+=`<tr><td><span class="tag ${e}">${EV[e].name}</span></td><td>${p}</td><td class="num">${r.length}</td><td class="num">${fmt(s)}</td><td class="num">${w==null?'—':fmt(w)}</td><td>${w==null?'':(w===s?'<span class="ok">✓</span>':'<span class="bad">differs by '+fmt(s-w)+'</span>')}</td></tr>`;
+  if((e==='M'&&p==='2')||(e==='B'&&p==='2')){const er=rows.filter(x=>x.e===e),es=sum(er),ew=WRITTEN_EVENT[e];
+    ph+=`<tr style="font-weight:700;background:#faf8f3"><td>${EV[e].name} total</td><td></td><td class="num">${er.length}</td><td class="num">${fmt(es)}</td><td class="num">${fmt(ew)}</td><td>${ew===es?'<span class="ok">✓</span>':'<span class="bad">differs by '+fmt(es-ew)+'</span>'}</td></tr>`}
+});
+const nr=rows.filter(x=>x.e==='N');
+ph+=`<tr style="font-weight:700;background:#faf8f3"><td>${EV.N.name} total</td><td></td><td class="num">${nr.length}</td><td class="num">${fmt(sum(nr))}</td><td class="num">—</td><td></td></tr>`;
+document.querySelector('#tp tbody').innerHTML=ph;
+
+// CSV download (same columns as nandraa.csv)
+document.getElementById('dl').onclick=()=>{
+  const q=s=>'"'+String(s).replace(/"/g,'""')+'"';
+  const head=['No','Event','Event (Urdu)','Date','Page','Serial','Name (English)','Name (Urdu)','Residence (English)','Residence (Urdu)','Amount (PKR)','Note','Needs check','Source photo','Line on page'];
+  const body=rows.map(x=>[x.i,EV[x.e].name,EV[x.e].ur,EV[x.e].date,x.p,x.sn==='—'?'':x.sn,x.en,x.name,x.ven,x.vil==='—'?'':x.vil,x.amt,x.note,x.chk?'yes':'',x.img,x.pi+1].map(q).join(','));
+  const blob=new Blob(['﻿'+head.map(q).join(',')+'\r\n'+body.join('\r\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nandraa.csv';a.click();
+};
+</script>
+</body>
+</html>
