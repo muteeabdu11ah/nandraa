@@ -64,6 +64,7 @@
   #toast.on{opacity:1;transform:translateX(-50%)}
   #toast button{margin-left:10px;background:#fff;border:0;border-radius:6px;padding:3px 10px;cursor:pointer;font:inherit}
   @media print{.edbar,.edhelp,#toast{display:none!important}}
+  body.live #edit,body.live .edbar,body.live .edhelp{display:none!important}
   .pbtns{display:flex;gap:6px;flex-shrink:0}
   .pbtns .btn{padding:6px 12px;font-size:17px;line-height:1}
   dialog#proof:not(.nav) .navb{display:none}
@@ -836,6 +837,7 @@ function refreshCells(){
   const n=Object.keys(ED.dict).length+Object.keys(ED.name).length+Object.keys(ED.vil).length+Object.keys(ED.vrow).length;
   document.getElementById('edcount').textContent=n?`${n} correction${n===1?'':'s'} saved in this browser`:'No corrections yet';
 }
+if(location.protocol!=='file:')document.body.classList.add('live'); // editing is only offered on the local copy
 const edbtn=document.getElementById('edit');
 edbtn.onclick=()=>{state.edit=!state.edit;edbtn.classList.toggle('ghost',!state.edit);edbtn.textContent=state.edit?'Editing ON – click to finish':'✎ Edit English spellings';
   document.body.classList.toggle('editing',state.edit);render()};
